@@ -43,7 +43,7 @@ export const invitationConfig = {
   /* ------------------------------------------------------------------ */
   /* RSVP / Contact                                                     */
   /* ------------------------------------------------------------------ */
-  whatsappNumber: '919876543210', // international format, digits only
+  whatsappNumber: '918074615740', // international format, digits only
   rsvpMessage:
     'Hello! Thank you for inviting me. I would love to join your engagement celebration.',
   rsvpWishesMessage:
