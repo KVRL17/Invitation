@@ -43,7 +43,7 @@ export function ClosingSection() {
         </Reveal>
 
         <Reveal direction="up" delay={0.25} className="mt-6 sm:mt-8">
-          <p className="font-script text-3xl text-burgundy sm:text-5xl">
+          <p className="font-script text-4xl text-burgundy sm:text-5xl">
             {brideName}
             <span className="mx-3 align-middle text-2xl text-rose sm:text-3xl" aria-hidden="true">
               <motion.svg
