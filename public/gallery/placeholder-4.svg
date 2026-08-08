@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF9F3"/>
+      <stop offset="1" stop-color="#E4EFD9"/>
+    </linearGradient>
+    <radialGradient id="h4" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="rgba(228,201,139,0.45)"/>
+      <stop offset="1" stop-color="rgba(228,201,139,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g4)"/>
+  <circle cx="400" cy="420" r="320" fill="url(#h4)"/>
+  <rect x="48" y="48" width="704" height="904" rx="20" fill="none" stroke="#A9B98A" stroke-width="2" stroke-dasharray="2 8" opacity="0.7"/>
+  <path d="M400 300 C400 300 300 250 300 205 C300 185 316 175 332 180 C348 185 400 235 400 235 C400 235 452 185 468 180 C484 175 500 185 500 205 C500 250 400 300 400 300 Z" fill="#A9B98A" opacity="0.9"/>
+  <text x="400" y="560" font-family="Georgia, serif" font-size="96" fill="#A9B98A" text-anchor="middle" opacity="0.85">A &amp; V</text>
+  <text x="400" y="640" font-family="Georgia, serif" font-size="30" fill="#6E5653" text-anchor="middle" letter-spacing="6">YOUR PHOTO HERE</text>
+  <circle cx="140" cy="170" r="14" fill="#A9B98A" opacity="0.5"/>
+  <circle cx="660" cy="170" r="10" fill="#A9B98A" opacity="0.4"/>
+  <circle cx="140" cy="830" r="10" fill="#A9B98A" opacity="0.4"/>
+  <circle cx="660" cy="830" r="14" fill="#A9B98A" opacity="0.5"/>
+</svg>
