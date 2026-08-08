@@ -280,11 +280,11 @@ export function IntroAnimation({
               transition={{ delay: 2.55, duration: 1, ease: EASE }}
             >
               <p
-                className="font-script text-4xl leading-tight text-gradient-gold min-[420px]:text-5xl sm:text-6xl md:text-7xl"
+                className="flex items-center justify-center font-script text-4xl leading-none text-gradient-gold min-[420px]:text-5xl sm:text-6xl md:text-7xl"
                 aria-label={`${invitationConfig.brideName} and ${invitationConfig.groomName}`}
               >
-                <span className="inline-block">{invitationConfig.brideName}</span>
-                <span className="mx-2 inline-block align-middle text-xl text-[#C9878E] min-[420px]:mx-3 min-[420px]:text-2xl sm:text-3xl" aria-hidden="true">
+                <span>{invitationConfig.brideName}</span>
+                <span className="mx-2 flex items-center text-xl text-[#C9878E] min-[420px]:mx-3 min-[420px]:text-2xl sm:text-3xl" aria-hidden="true">
                   <motion.svg
                     width="24"
                     height="24"
@@ -300,7 +300,7 @@ export function IntroAnimation({
                     />
                   </motion.svg>
                 </span>
-                <span className="inline-block">{invitationConfig.groomName}</span>
+                <span>{invitationConfig.groomName}</span>
               </p>
             </motion.div>
 

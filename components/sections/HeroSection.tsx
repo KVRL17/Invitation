@@ -72,7 +72,6 @@ export function HeroSection() {
           <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">{brideName}</span>
           </h1>
-          <div className="mx-auto my-3 h-px w-24 bg-gold/70 sm:my-5 sm:w-32" aria-hidden="true" />
           <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">&amp;</span>
             <span className="block">{groomName}</span>
