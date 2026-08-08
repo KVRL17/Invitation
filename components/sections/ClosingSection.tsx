@@ -45,19 +45,8 @@ export function ClosingSection() {
         <Reveal direction="up" delay={0.25} className="mt-6 sm:mt-8">
           <p className="font-script text-4xl text-burgundy sm:text-5xl">
             {brideName}
-            <span className="mx-3 align-middle text-2xl text-rose sm:text-3xl" aria-hidden="true">
-              <motion.svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                animate={reduce ? undefined : { scale: [1, 1.16, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <path
-                  d="M12 21 C12 21 2 14.5 2 8.5 C2 4.5 5 3 7.5 3 C10 3 12 5.5 12 5.5 C12 5.5 14 3 16.5 3 C19 3 22 4.5 22 8.5 C22 14.5 12 21 12 21 Z"
-                  fill="#C9878E"
-                />
-              </motion.svg>
+            <span className="mx-3 align-middle font-serif text-2xl italic text-rose sm:text-3xl">
+              and
             </span>
             {groomName}
           </p>

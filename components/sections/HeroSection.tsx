@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import { invitationConfig, EVENT_DATETIME, EVENT_WEEKDAY } from '@/lib/invitationConfig';
 import { FloralFrame } from '../decor/FloralFrame';
 import { Sparkle } from '../decor/Sparkle';
@@ -72,23 +72,7 @@ export function HeroSection() {
           <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">{brideName}</span>
           </h1>
-          <div className="my-3 flex items-center justify-center gap-4 sm:my-5">
-            <span className="h-px w-14 bg-gold/70 sm:w-20" />
-            <motion.svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              animate={reduce ? undefined : { scale: [1, 1.15, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <path
-                d="M12 21 C12 21 2 14.5 2 8.5 C2 4.5 5 3 7.5 3 C10 3 12 5.5 12 5.5 C12 5.5 14 3 16.5 3 C19 3 22 4.5 22 8.5 C22 14.5 12 21 12 21 Z"
-                fill="#C9878E"
-              />
-            </motion.svg>
-            <span className="h-px w-14 bg-gold/70 sm:w-20" />
-          </div>
+          <div className="mx-auto my-3 h-px w-24 bg-gold/70 sm:my-5 sm:w-32" aria-hidden="true" />
           <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">&amp;</span>
             <span className="block">{groomName}</span>
