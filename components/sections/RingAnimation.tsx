@@ -32,7 +32,7 @@ export function RingAnimation() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden px-5 py-24 sm:py-28"
+      className="relative overflow-hidden px-5 py-14 sm:py-28"
       aria-label="A promise written in gold"
       style={{
         background:
@@ -49,10 +49,10 @@ export function RingAnimation() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:justify-center md:gap-20">
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-8 md:flex-row md:justify-center md:gap-20">
         {/* ring visual */}
         <motion.div
-          className="relative flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72"
+          className="relative flex h-56 w-56 items-center justify-center sm:h-72 sm:w-72"
           style={{ rotate: reduce ? 0 : rotation }}
           initial={{ opacity: 0, scale: 0.85 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -73,15 +73,15 @@ export function RingAnimation() {
 
         {/* text */}
         <Reveal direction="right" distance={50} amount={0.5} className="text-center md:text-left">
-          <h2 className="font-script text-5xl leading-[1.25] text-burgundy sm:text-6xl">
+          <h2 className="font-script text-4xl leading-[1.25] text-burgundy sm:text-6xl">
             A Promise
             <br />
             Written in Gold
             <br />
             <span className="text-gold">Made to Last a Lifetime</span>
           </h2>
-          <div className="mx-auto mt-6 h-px w-24 bg-gold/60 md:mx-0" aria-hidden="true" />
-          <p className="mt-6 max-w-sm font-serif text-lg italic text-ink-soft">
+          <div className="mx-auto mt-5 h-px w-24 bg-gold/60 md:mx-0" aria-hidden="true" />
+          <p className="mt-5 max-w-sm font-serif text-lg italic text-ink-soft">
             Where words fall short, this ring speaks — a circle without end,
             a love without measure.
           </p>

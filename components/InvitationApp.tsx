@@ -54,7 +54,7 @@ export function InvitationApp() {
         <main id="invitation" className="relative">
           <HeroSection />
 
-          <section className="py-10 sm:py-14" aria-hidden="true">
+          <section className="py-6 sm:py-14" aria-hidden="true">
             <Monogram />
           </section>
 

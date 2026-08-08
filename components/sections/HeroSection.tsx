@@ -19,7 +19,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-14 text-center sm:py-20"
       aria-label="Engagement announcement"
     >
       {/* soft ivory backdrop */}
@@ -68,11 +68,11 @@ export function HeroSection() {
           </p>
         </Reveal>
 
-        <Stagger className="mt-8" step={0.22} delay={0.15}>
-          <h1 className="font-script text-[3.4rem] leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
+        <Stagger className="mt-6 sm:mt-8" step={0.22} delay={0.15}>
+          <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">{brideName}</span>
           </h1>
-          <div className="my-4 flex items-center justify-center gap-4 sm:my-5">
+          <div className="my-3 flex items-center justify-center gap-4 sm:my-5">
             <span className="h-px w-14 bg-gold/70 sm:w-20" />
             <motion.svg
               width="26"
@@ -89,37 +89,37 @@ export function HeroSection() {
             </motion.svg>
             <span className="h-px w-14 bg-gold/70 sm:w-20" />
           </div>
-          <h1 className="font-script text-[3.4rem] leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
+          <h1 className="font-script text-6xl leading-[1.05] text-burgundy sm:text-7xl md:text-8xl">
             <span className="block">&amp;</span>
             <span className="block">{groomName}</span>
           </h1>
         </Stagger>
 
-        <Reveal direction="up" delay={0.6} className="mt-7">
+        <Reveal direction="up" delay={0.6} className="mt-6 sm:mt-7">
           <p className="font-serif text-lg italic text-ink-soft sm:text-2xl">
             Joyfully invite you to celebrate their engagement
           </p>
         </Reveal>
 
-        <Reveal direction="up" delay={0.85} className="mt-10">
-          <div className="glass-card rounded-[2rem] px-8 py-7 sm:px-12 sm:py-9">
+        <Reveal direction="up" delay={0.85} className="mt-8 sm:mt-10">
+          <div className="glass-card rounded-[2rem] px-6 py-6 sm:px-12 sm:py-9">
             <p className="font-sans text-xs uppercase tracking-[0.34em] text-gold-dark">
               {EVENT_WEEKDAY}
             </p>
-            <p className="mt-2 font-serif text-2xl font-semibold text-burgundy sm:text-4xl">
+            <p className="mt-1.5 font-serif text-2xl font-semibold text-burgundy sm:mt-2 sm:text-4xl">
               {date.toLocaleDateString('en-US', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric',
               })}
             </p>
-            <p className="mt-2 font-sans text-sm tracking-[0.22em] text-ink-soft sm:text-base">
+            <p className="mt-1.5 font-sans text-sm tracking-[0.22em] text-ink-soft sm:mt-2 sm:text-base">
               {invitationConfig.eventTimeLabel}
             </p>
           </div>
         </Reveal>
 
-        <Reveal direction="up" delay={1.05} className="mt-10">
+        <Reveal direction="up" delay={1.05} className="mt-8 sm:mt-10">
           <a
             href="#save-the-date"
             className="gold-ring-btn rounded-full px-9 py-3.5 font-sans text-[12px] font-medium uppercase tracking-[0.28em] text-burgundy"

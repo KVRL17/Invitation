@@ -19,7 +19,7 @@ export function CoupleSection() {
   return (
     <section
       id="meet-the-couple"
-      className="relative overflow-hidden px-5 py-24 sm:py-32"
+      className="relative overflow-hidden px-5 py-14 sm:py-32"
       aria-label="Meet the couple"
     >
       {/* soft backdrop */}
@@ -42,12 +42,12 @@ export function CoupleSection() {
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           With hearts full of joy
         </p>
-        <h2 className="mt-3 font-script text-5xl text-burgundy sm:text-6xl md:text-7xl">
+        <h2 className="mt-2 font-script text-4xl text-burgundy sm:mt-3 sm:text-6xl md:text-7xl">
           Meet the Couple
         </h2>
       </Reveal>
 
-      <div className="relative z-10 mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-12 sm:gap-10 md:grid-cols-2 md:gap-8">
+      <div className="relative z-10 mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-10 sm:mt-14 sm:gap-10 md:grid-cols-2 md:gap-8">
         {/* -------- bride -------- */}
         <Reveal direction="left" distance={56} amount={0.35}>
           <div className="flex flex-col items-center text-center">
@@ -76,7 +76,7 @@ export function CoupleSection() {
               )}
             </div>
 
-            <h3 className="mt-6 font-script text-4xl text-burgundy sm:text-5xl">{brideName}</h3>
+            <h3 className="mt-5 font-script text-4xl text-burgundy sm:mt-6 sm:text-5xl">{brideName}</h3>
             <p className="mt-1 font-sans text-[10px] uppercase tracking-[0.32em] text-gold-dark sm:text-xs">
               The Bride
             </p>
@@ -108,7 +108,7 @@ export function CoupleSection() {
               )}
             </div>
 
-            <h3 className="mt-6 font-script text-4xl text-burgundy sm:text-5xl">{groomName}</h3>
+            <h3 className="mt-5 font-script text-4xl text-burgundy sm:mt-6 sm:text-5xl">{groomName}</h3>
             <p className="mt-1 font-sans text-[10px] uppercase tracking-[0.32em] text-gold-dark sm:text-xs">
               The Groom
             </p>
@@ -117,7 +117,7 @@ export function CoupleSection() {
       </div>
 
       {/* heart divider */}
-      <Reveal delay={0.2} className="relative z-10 mt-14">
+      <Reveal delay={0.2} className="relative z-10 mt-10 sm:mt-14">
         <div className="flex items-center justify-center gap-4" aria-hidden="true">
           <span className="h-px w-16 bg-gold/50 sm:w-24" />
           <svg
@@ -135,7 +135,7 @@ export function CoupleSection() {
         </div>
       </Reveal>
 
-      <Reveal delay={0.3} className="relative z-10 mt-8 text-center">
+      <Reveal delay={0.3} className="relative z-10 mt-6 text-center sm:mt-8">
         <p className="mx-auto max-w-md font-serif text-lg italic leading-relaxed text-ink-soft sm:text-xl">
           Two souls, one heart — our love story begins here, and we would be
           honoured to have you be part of it.

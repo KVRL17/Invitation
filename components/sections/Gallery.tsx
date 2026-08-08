@@ -44,22 +44,22 @@ export function Gallery() {
   }, [open, close, next, prev]);
 
   return (
-    <section className="relative overflow-hidden px-5 py-24 sm:py-28" aria-label="Photo gallery">
+    <section className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="Photo gallery">
       <Reveal direction="up" className="text-center">
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           Moments to treasure
         </p>
-        <h2 className="mt-3 font-script text-5xl text-burgundy sm:text-6xl">
+        <h2 className="mt-2 font-script text-4xl text-burgundy sm:mt-3 sm:text-6xl">
           Our Beautiful Moments
         </h2>
-        <div className="mt-5 flex items-center justify-center gap-3" aria-hidden="true">
+        <div className="mt-4 flex items-center justify-center gap-3 sm:mt-5" aria-hidden="true">
           <span className="h-px w-16 bg-gold/50" />
           <HeartOrnament size={14} color="#C9878E" className="anim-heartbeat" />
           <span className="h-px w-16 bg-gold/50" />
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-5 sm:gap-8 md:grid-cols-3">
+      <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:mt-14 sm:gap-8 md:grid-cols-3">
         {images.map((src, i) => (
           <Reveal
             key={src}
@@ -78,7 +78,7 @@ export function Gallery() {
               aria-label={`Open photo ${i + 1}`}
               style={{ transform: `rotate(${ROTATIONS[i % ROTATIONS.length]}deg)` }}
             >
-              <div className="rounded-2xl bg-white p-2.5 pb-4 shadow-card sm:p-3 sm:pb-5">
+              <div className="rounded-2xl bg-white p-2 pb-4 shadow-card sm:p-3 sm:pb-5">
                 <div className="overflow-hidden rounded-xl">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -90,7 +90,7 @@ export function Gallery() {
                     className="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
                 </div>
-                <p className="mt-3 text-center font-script text-xl text-burgundy/80 sm:text-2xl">
+                <p className="mt-2 text-center font-script text-lg text-burgundy/80 sm:mt-3 sm:text-2xl">
                   {invitationConfig.brideInitial} <span className="text-rose">♥</span> {invitationConfig.groomInitial}
                 </p>
               </div>

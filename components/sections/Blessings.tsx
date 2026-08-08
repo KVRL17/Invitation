@@ -13,7 +13,7 @@ export function Blessings() {
 
   return (
     <section
-      className="relative overflow-hidden px-5 py-24 sm:py-32"
+      className="relative overflow-hidden px-5 py-14 sm:py-32"
       aria-label="Blessings"
       style={{
         background:
@@ -32,14 +32,14 @@ export function Blessings() {
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-[#E9D3A0]/80 sm:text-xs">
           With gratitude
         </p>
-        <h2 className="mx-auto mt-4 max-w-2xl font-script text-4xl leading-[1.2] text-[#F5E6D3] sm:text-6xl">
+        <h2 className="mx-auto mt-3 max-w-2xl font-script text-3xl leading-[1.2] text-[#F5E6D3] sm:mt-4 sm:text-6xl">
           Your Blessings Mean
           <br />
           Everything To Us
         </h2>
 
         {/* diya */}
-        <div className="mx-auto mt-12 flex max-w-xs items-center justify-center">
+        <div className="mx-auto mt-8 flex max-w-xs items-center justify-center sm:mt-12">
           <svg viewBox="0 0 200 130" className="w-full max-w-[220px]" role="img" aria-label="A softly glowing traditional lamp">
             <defs>
               <radialGradient id="diya-halo" cx="50%" cy="45%" r="50%">
@@ -76,7 +76,7 @@ export function Blessings() {
           </svg>
         </div>
 
-        <p className="mx-auto mt-10 max-w-md font-serif text-lg italic leading-relaxed text-[#E9D3A0]/85">
+        <p className="mx-auto mt-8 max-w-md font-serif text-lg italic leading-relaxed text-[#E9D3A0]/85 sm:mt-10">
           Every blessing and every wish you share
           <br />
           becomes a light on our journey together.

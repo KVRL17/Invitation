@@ -13,7 +13,7 @@ export function RsvpSection() {
   return (
     <section
       id="rsvp"
-      className="relative overflow-hidden px-5 py-24 sm:py-32"
+      className="relative overflow-hidden px-5 py-14 sm:py-32"
       aria-label="RSVP"
       style={{
         background:
@@ -29,17 +29,17 @@ export function RsvpSection() {
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           Our hearts await your reply
         </p>
-        <h2 className="mt-3 font-script text-5xl text-burgundy sm:text-6xl">
+        <h2 className="mt-2 font-script text-4xl text-burgundy sm:mt-3 sm:text-6xl">
           Will You Join Us?
         </h2>
       </Reveal>
 
-      <Stagger className="relative z-10 mx-auto mt-12 flex max-w-md flex-col items-center gap-5" step={0.15}>
+      <Stagger className="relative z-10 mx-auto mt-8 flex max-w-md flex-col items-center gap-4 sm:mt-12 sm:gap-5" step={0.15}>
         <a
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="gold-ring-btn flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-b from-gold-light/30 to-gold/20 px-8 py-4 font-sans text-[13px] font-semibold uppercase tracking-[0.22em] text-burgundy"
+          className="gold-ring-btn flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-b from-gold-light/30 to-gold/20 px-6 py-4 font-sans text-[13px] font-semibold uppercase tracking-[0.22em] text-burgundy sm:px-8"
         >
           <Icon name="check" size={16} color="currentColor" />
           Joyfully Accept
@@ -49,14 +49,14 @@ export function RsvpSection() {
           href={WHATSAPP_WISHES_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-3 rounded-full border border-gold/50 bg-white/70 px-8 py-4 font-sans text-[13px] font-medium uppercase tracking-[0.22em] text-burgundy transition hover:-translate-y-0.5 hover:shadow-glow-soft"
+          className="flex w-full items-center justify-center gap-3 rounded-full border border-gold/50 bg-white/70 px-6 py-4 font-sans text-[13px] font-medium uppercase tracking-[0.22em] text-burgundy transition hover:-translate-y-0.5 hover:shadow-glow-soft sm:px-8"
         >
           <Icon name="chat" size={16} color="currentColor" />
           Send Wishes
         </a>
       </Stagger>
 
-      <Reveal delay={0.4} className="relative z-10 mt-10 text-center">
+      <Reveal delay={0.4} className="relative z-10 mt-8 text-center sm:mt-10">
         <p className="font-serif text-base italic text-ink-soft sm:text-lg">
           Prefer to call or text? Reach us anytime on WhatsApp.
         </p>

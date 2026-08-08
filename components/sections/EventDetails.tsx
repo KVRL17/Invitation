@@ -26,7 +26,7 @@ export function EventDetails() {
   ];
 
   return (
-    <section id="event-details" className="relative overflow-hidden px-5 py-24 sm:py-28" aria-label="Engagement ceremony details">
+    <section id="event-details" className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="Engagement ceremony details">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <Blossom size={80} tone="cream" opacity={0.4} className="absolute -right-8 top-10" />
         <Blossom size={60} tone="rose" opacity={0.2} className="absolute -left-6 bottom-24" />
@@ -37,16 +37,16 @@ export function EventDetails() {
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           Join us at
         </p>
-        <h2 className="mt-3 font-script text-5xl text-burgundy sm:text-6xl">
+        <h2 className="mt-2 font-script text-4xl text-burgundy sm:mt-3 sm:text-6xl">
           Engagement Ceremony
         </h2>
       </Reveal>
 
-      <Reveal delay={0.2} className="mx-auto mt-12 max-w-2xl">
-        <div className="glass-card overflow-hidden rounded-[2.5rem] p-8 sm:p-10">
+      <Reveal delay={0.2} className="mx-auto mt-8 max-w-2xl sm:mt-12">
+        <div className="glass-card overflow-hidden rounded-[2rem] p-6 sm:rounded-[2.5rem] sm:p-10">
           <ul className="divide-y divide-gold/15">
             {rows.map((row) => (
-              <li key={row.label} className="flex items-center gap-5 py-5">
+              <li key={row.label} className="flex items-center gap-4 py-4 sm:gap-5 sm:py-5">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-ivory text-gold-dark">
                   <Icon name={row.icon} size={22} />
                 </span>
@@ -60,7 +60,7 @@ export function EventDetails() {
             ))}
           </ul>
 
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center sm:mt-8">
             <a
               href={invitationConfig.googleMapsUrl}
               target="_blank"
