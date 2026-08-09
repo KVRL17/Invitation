@@ -37,6 +37,8 @@ export function AutoScroll() {
     if (timerRef.current !== null) clearTimeout(timerRef.current);
     rafRef.current = null;
     timerRef.current = null;
+    // Put the global smooth scroll back, now that the tour is finished.
+    document.documentElement.style.scrollBehavior = '';
     setRunning(false);
   }, []);
 
@@ -45,6 +47,12 @@ export function AutoScroll() {
     stopRef.current = false;
     runningRef.current = true;
     setRunning(true);
+
+    // The global stylesheet sets `scroll-behavior: smooth`, but that makes
+    // the browser animate *every* scrollTo in the rAF loop below, fighting
+    // our own easing and making the cruise laggy. Pin it to `auto` for the
+    // duration of the tour; `stop()` (or the completion path) restores it.
+    document.documentElement.style.scrollBehavior = 'auto';
 
     const sleep = (ms: number) =>
       new Promise<void>((resolve) => {
@@ -74,6 +82,7 @@ export function AutoScroll() {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
       const distance = Math.max(0, maxY - startY);
       if (distance <= 0) {
+        document.documentElement.style.scrollBehavior = '';
         stopRef.current = true;
         runningRef.current = false;
         setRunning(false);
@@ -91,6 +100,10 @@ export function AutoScroll() {
         if (t < 1) {
           rafRef.current = requestAnimationFrame(step);
         } else {
+          // Images/reveals can change the page height mid-flight, so settle
+          // on the *current* true bottom rather than the value measured above.
+          document.documentElement.style.scrollBehavior = '';
+          window.scrollTo(0, document.documentElement.scrollHeight - window.innerHeight);
           stopRef.current = true;
           runningRef.current = false;
           setRunning(false);
