@@ -54,8 +54,12 @@ export function CoupleSection() {
                 className="relative overflow-hidden rounded-t-full rounded-b-[46%] border border-gold/50 bg-gradient-to-b from-ivory to-champagne/70 p-2 shadow-card"
                 style={{ width: 262, height: 330 }}
               >
-                <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
-                  <div className={`h-full w-full ${reduce ? '' : 'anim-float-soft'}`}>
+                <div className="relative h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
+                  {/* The image is oversized (absolute inset -10px) so the float
+                      animation never exposes a gap around it. */}
+                  <div
+                    className={`absolute -inset-[10px] ${reduce ? '' : 'anim-float-soft'}`}
+                  >
                     <img
                       src="/images/bride.jpeg?v=2"
                       alt={`${invitationConfig.brideName} — The Bride`}
@@ -92,8 +96,12 @@ export function CoupleSection() {
                 className="relative overflow-hidden rounded-t-full rounded-b-[46%] border border-gold/50 bg-gradient-to-b from-ivory to-champagne/70 p-2 shadow-card"
                 style={{ width: 262, height: 330 }}
               >
-                <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
-                  <div className={`h-full w-full ${reduce ? '' : 'anim-float-soft'}`} style={{ animationDelay: '0.7s' }}>
+                <div className="relative h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
+                  {/* Oversized so the float never exposes a gap. */}
+                  <div
+                    className={`absolute -inset-[10px] ${reduce ? '' : 'anim-float-soft'}`}
+                    style={{ animationDelay: '0.7s' }}
+                  >
                     <img
                       src="/images/groom.jpeg?v=2"
                       alt={`${invitationConfig.groomName} — The Groom`}
