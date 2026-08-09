@@ -60,7 +60,6 @@ export function CoupleSection() {
                       src="/images/bride.jpeg"
                       alt={`${invitationConfig.brideName} — The Bride`}
                       className="h-full w-full object-cover"
-                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -99,7 +98,6 @@ export function CoupleSection() {
                       src="/images/groom.jpeg"
                       alt={`${invitationConfig.groomName} — The Groom`}
                       className="h-full w-full object-cover"
-                      loading="lazy"
                     />
                   </div>
                 </div>

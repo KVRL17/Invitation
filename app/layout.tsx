@@ -47,6 +47,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${greatVibes.variable} ${cormorant.variable} ${montserrat.variable}`}>
+      <head>
+        {/* Preload the couple photos during the intro so the
+            "Meet the Couple" section renders instantly with no lag. */}
+        <link rel="preload" as="image" href="/images/bride.jpeg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/groom.jpeg" fetchPriority="high" />
+      </head>
       <body>{children}</body>
     </html>
   );
