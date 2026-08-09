@@ -40,7 +40,9 @@ export const metadata: Metadata = {
       'Together Forever Begins Here ❤️ Tap to open our engagement invitation.',
     images: [
       {
-        url: `${SITE_URL}/whatsapp-preview.jpg`,
+        // ?v=2 cache-buster: WhatsApp/other crawlers cache the preview image
+        // by its URL, so bump this when the preview image is regenerated.
+        url: `${SITE_URL}/whatsapp-preview.jpg?v=2`,
         width: 1200,
         height: 630,
         alt: 'Brinda & Chaitanya 💍 Engagement Invitation',
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     title: 'Brinda & Chaitanya 💍 Engagement Invitation',
     description:
       'Together Forever Begins Here ❤️ Tap to open our engagement invitation.',
-    images: [`${SITE_URL}/whatsapp-preview.jpg`],
+    images: [`${SITE_URL}/whatsapp-preview.jpg?v=2`],
   },
 };
 
