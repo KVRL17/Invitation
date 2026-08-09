@@ -38,7 +38,10 @@ export function MusicPlayer() {
     const audio = new Audio(fileUrl);
     audio.preload = 'auto';
     audio.volume = 0.18;
-    // Loop only the chosen segment, not the whole file.
+    // The bundled file is trimmed to exactly the looped segment, so native
+    // looping restarts it at 0 (== AUDIO_START) seamlessly. The timeupdate
+    // check below is a precise fallback in case the file is ever replaced.
+    audio.loop = true;
     audio.addEventListener('timeupdate', () => {
       if (audio.currentTime >= AUDIO_END) audio.currentTime = AUDIO_START;
     });

@@ -36,8 +36,8 @@ export const invitationConfig = {
   /* ------------------------------------------------------------------ */
   /* Venue                                                              */
   /* ------------------------------------------------------------------ */
-  venueName: 'Eat n Play Function Hall',
-  venueAddress: 'Beside HP Petrol Bunk, Jampeta, Rajahmundry, Andhra Pradesh 533103',
+  venueName: 'Eat and Play Convention Hall',
+  venueAddress: 'Beside HP Petrol Bunk, Y Junction, Rajahmundry, Andhra Pradesh 533103',
   googleMapsUrl: 'https://maps.app.goo.gl/ojy8zo1nTDqE7pzu6?g_st=iw',
 
   /* ------------------------------------------------------------------ */
