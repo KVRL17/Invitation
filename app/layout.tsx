@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Great_Vibes, Montserrat } from 'next/font/google';
 import './globals.css';
 
+/** Production origin — used for all absolute social-sharing URLs. */
+const SITE_URL = 'https://brinda-chaitanya-engagement-invitat.vercel.app';
+
 const greatVibes = Great_Vibes({
   weight: '400',
   subsets: ['latin'],
@@ -24,15 +27,32 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Brinda & Chaitanya — Engagement Invitation',
+  metadataBase: new URL(SITE_URL),
+  title: 'Brinda & Chaitanya 💍 Engagement Invitation',
   description:
-    'Together with our families, we joyfully invite you to celebrate our engagement. Save the date and join us for an evening of love and celebration.',
+    'Together Forever Begins Here ❤️ Tap to open our engagement invitation.',
   keywords: ['engagement', 'invitation', 'wedding', 'save the date'],
   openGraph: {
-    title: 'Brinda & Chaitanya — Engagement Invitation',
-    description:
-      'Together with our families, we joyfully invite you to celebrate our engagement.',
     type: 'website',
+    url: SITE_URL,
+    title: 'Brinda & Chaitanya 💍 Engagement Invitation',
+    description:
+      'Together Forever Begins Here ❤️ Tap to open our engagement invitation.',
+    images: [
+      {
+        url: `${SITE_URL}/whatsapp-preview.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Brinda & Chaitanya 💍 Engagement Invitation',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Brinda & Chaitanya 💍 Engagement Invitation',
+    description:
+      'Together Forever Begins Here ❤️ Tap to open our engagement invitation.',
+    images: [`${SITE_URL}/whatsapp-preview.jpg`],
   },
 };
 
