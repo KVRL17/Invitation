@@ -28,9 +28,9 @@ export const invitationConfig = {
   /* Event                                                              */
   /* ------------------------------------------------------------------ */
   eventDate: '2026-08-16', // ISO format, used by the countdown
-  eventTime: '12:00:00', // 24h, local — used by the countdown
+  eventTime: '10:00:00', // 24h, local — used by the countdown
   eventDateLabel: '16 August 2026',
-  eventTimeLabel: '12:00 PM onwards',
+  eventTimeLabel: '10:00 AM onwards',
   eventWeekdayLabel: 'Saturday', // derived automatically if left empty
 
   /* ------------------------------------------------------------------ */

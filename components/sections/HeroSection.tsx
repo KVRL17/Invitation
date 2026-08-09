@@ -19,6 +19,7 @@ export function HeroSection() {
 
   return (
     <section
+      id="hero"
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-14 text-center sm:py-20"
       aria-label="Engagement announcement"
     >

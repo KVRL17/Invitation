@@ -44,7 +44,7 @@ export function Gallery() {
   }, [open, close, next, prev]);
 
   return (
-    <section className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="Photo gallery">
+    <section id="gallery" className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="Photo gallery">
       <Reveal direction="up" className="text-center">
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           Moments to treasure

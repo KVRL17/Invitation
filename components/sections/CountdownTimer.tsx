@@ -42,7 +42,7 @@ export function CountdownTimer() {
   ];
 
   return (
-    <section className="relative overflow-hidden px-5 py-14 sm:py-24" aria-label="Countdown to the engagement">
+    <section id="countdown" className="relative overflow-hidden px-5 py-14 sm:py-24" aria-label="Countdown to the engagement">
       <Reveal direction="up" className="text-center">
         <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-gold-dark sm:text-xs">
           Counting every moment

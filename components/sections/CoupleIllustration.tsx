@@ -11,7 +11,7 @@ import { Blossom, Leaf } from '../decor/Flower';
  */
 export function CoupleIllustration() {
   return (
-    <section className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="A celebration of love">
+    <section id="couple-illustration" className="relative overflow-hidden px-5 py-14 sm:py-28" aria-label="A celebration of love">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <Blossom size={88} tone="rose" opacity={0.16} className="absolute -left-8 top-16" />
         <Blossom size={70} tone="cream" opacity={0.5} className="absolute -right-7 bottom-16" />

@@ -50,8 +50,8 @@ export default function RootLayout({
       <head>
         {/* Preload the couple photos during the intro so the
             "Meet the Couple" section renders instantly with no lag. */}
-        <link rel="preload" as="image" href="/images/bride.jpeg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/groom.jpeg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/bride.jpeg?v=2" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/groom.jpeg?v=2" fetchPriority="high" />
       </head>
       <body>{children}</body>
     </html>

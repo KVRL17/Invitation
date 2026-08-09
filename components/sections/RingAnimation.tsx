@@ -32,6 +32,7 @@ export function RingAnimation() {
   return (
     <section
       ref={ref}
+      id="ring-animation"
       className="relative overflow-hidden px-5 py-14 sm:py-28"
       aria-label="A promise written in gold"
       style={{

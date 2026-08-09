@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { IntroAnimation } from './IntroAnimation';
 import { MusicPlayer } from './MusicPlayer';
+import { AutoScroll } from './AutoScroll';
 import { CursorEffect } from './CursorEffect';
 import { FloatingPetals } from './FloatingPetals';
 import { HeroSection } from './sections/HeroSection';
@@ -46,6 +47,7 @@ export function InvitationApp() {
       )}
 
       <MusicPlayer />
+      <AutoScroll />
       <CursorEffect />
 
       {/* main invitation — mounted as soon as the guest clicks "Open", so the

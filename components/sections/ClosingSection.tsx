@@ -17,6 +17,7 @@ export function ClosingSection() {
 
   return (
     <section
+      id="closing"
       className="relative overflow-hidden px-5 py-16 sm:py-36"
       aria-label="Closing"
       style={{

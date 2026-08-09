@@ -13,6 +13,7 @@ export function Blessings() {
 
   return (
     <section
+      id="blessings"
       className="relative overflow-hidden px-5 py-14 sm:py-32"
       aria-label="Blessings"
       style={{
