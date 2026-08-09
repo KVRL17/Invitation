@@ -5,9 +5,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AmbientEngine } from '@/lib/audioEngine';
 import { invitationConfig } from '@/lib/invitationConfig';
 
-/** Play the background track only between these timestamps (seconds), looping. */
-const AUDIO_START = 10;
-const AUDIO_END = 90;
+/**
+ * The bundled track (`public/audio/sada-nannu.mp3`) is trimmed to exactly the
+ * looped segment, so it starts at 0s and the loop point is its full length.
+ */
+const AUDIO_START = 0;
+const AUDIO_END = 80;
 
 /**
  * MusicPlayer — a small floating control (bottom-right).
@@ -27,25 +30,38 @@ export function MusicPlayer() {
   const engineRef = useRef<AmbientEngine | null>(null);
   const fileUrl = invitationConfig.backgroundMusic;
 
+  // Start buffering the track as soon as the site loads (while the intro
+  // animation plays) so that when the guest taps "Open Our Invitation" the
+  // music can begin instantly instead of waiting for the file to download.
+  useEffect(() => {
+    if (!fileUrl) return;
+    const audio = new Audio(fileUrl);
+    audio.preload = 'auto';
+    audio.volume = 0.18;
+    // Loop only the chosen segment, not the whole file.
+    audio.addEventListener('timeupdate', () => {
+      if (audio.currentTime >= AUDIO_END) audio.currentTime = AUDIO_START;
+    });
+    audio.load();
+    audioRef.current = audio;
+    return () => {
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, [fileUrl]);
+
   const start = useCallback(async () => {
     if (playing) return;
 
     if (fileUrl) {
-      if (!audioRef.current) {
-        const audio = new Audio(fileUrl);
-        audio.volume = 0.18;
-        // Loop only the chosen segment, not the whole file.
-        audio.addEventListener('timeupdate', () => {
-          if (audio.currentTime >= AUDIO_END) audio.currentTime = AUDIO_START;
-        });
-        audioRef.current = audio;
-      }
       const audio = audioRef.current;
-      // Jump straight to the segment start (also handles resume near the end).
-      if (audio.currentTime < AUDIO_START || audio.currentTime >= AUDIO_END) {
-        audio.currentTime = AUDIO_START;
+      if (audio) {
+        // Jump straight to the segment start (also handles resume near the end).
+        if (audio.currentTime < AUDIO_START || audio.currentTime >= AUDIO_END) {
+          audio.currentTime = AUDIO_START;
+        }
+        await audio.play();
       }
-      await audio.play();
     } else {
       if (!engineRef.current) engineRef.current = new AmbientEngine();
       await engineRef.current.start();

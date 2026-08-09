@@ -36,9 +36,9 @@ export const invitationConfig = {
   /* ------------------------------------------------------------------ */
   /* Venue                                                              */
   /* ------------------------------------------------------------------ */
-  venueName: 'Sakhi Function Hall',
-  venueAddress: 'Rajahmundry, Andhra Pradesh, India',
-  googleMapsUrl: 'https://maps.google.com/?q=Sakhi+Function+Hall+Rajahmundry',
+  venueName: 'Eat n Play Function Hall',
+  venueAddress: 'Beside HP Petrol Bunk, Jampeta, Rajahmundry, Andhra Pradesh 533103',
+  googleMapsUrl: 'https://maps.app.goo.gl/ojy8zo1nTDqE7pzu6?g_st=iw',
 
   /* ------------------------------------------------------------------ */
   /* RSVP / Contact                                                     */
@@ -67,8 +67,9 @@ export const invitationConfig = {
    * Leave empty to use the built-in generative ambient track.
    *
    * Current track: "Sada Nannu" instrumental sitar cover (from the Telugu
-   * film Mahanati). The player is set to play only the segment from 30s to
-   * 1:30s and loop it — see components/MusicPlayer.tsx (AUDIO_START/AUDIO_END).
+   * film Mahanati), pre-trimmed to the looped segment (~80s, ~0.9 MB) so it
+   * buffers fast. It is preloaded during the intro and starts the moment the
+   * guest opens the invitation — see components/MusicPlayer.tsx.
    */
   // backgroundMusic: '',
   backgroundMusic: '/audio/sada-nannu.mp3',
