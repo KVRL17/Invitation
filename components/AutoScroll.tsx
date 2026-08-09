@@ -5,9 +5,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 /**
  * AutoScroll — after the invitation opens, glides the guest through the
- * whole page with one continuous, even scroll (no per-section pauses). The
- * tour stops the moment the guest scrolls, touches or presses a key, and a
- * small button lets them restart it. Respects prefers-reduced-motion.
+ * whole page with one continuous, even scroll (no per-section pauses).
+ * Resting a finger on a touch screen pauses the glide in place and resumes
+ * it from that exact spot on release; a real drag, wheel scroll, or key
+ * press ends the tour, and a small button restarts it. Respects
+ * prefers-reduced-motion.
  */
 
 /** Pace of the continuous scroll, in pixels per second. */
@@ -20,6 +22,11 @@ export function AutoScroll() {
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
+  const [hasTouch] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      (('ontouchstart' in window) || navigator.maxTouchPoints > 0)
+  );
   // Keep the "am I running" guard in a ref (not state) so `run`/`stop` stay
   // referentially stable. If they depended on the `running` state, toggling
   // it would recreate them, which would re-run the `invitation:open` effect
@@ -29,10 +36,18 @@ export function AutoScroll() {
   const rafRef = useRef<number | null>(null);
   const timerRef = useRef<number | null>(null);
   const stopRef = useRef(false);
+  // True while a finger is resting on the screen — the glide holds position
+  // and continues from there once the finger lifts.
+  const pausedRef = useRef(false);
+  // Where the current touch started, so a real drag can be told apart from a
+  // light hold-and-release.
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   const stop = useCallback(() => {
     stopRef.current = true;
     runningRef.current = false;
+    pausedRef.current = false;
+    touchStartRef.current = null;
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     if (timerRef.current !== null) clearTimeout(timerRef.current);
     rafRef.current = null;
@@ -90,10 +105,21 @@ export function AutoScroll() {
       }
 
       const duration = (distance / SCROLL_PX_PER_S) * 1000;
-      const t0 = performance.now();
+      // Accumulate elapsed time frame-to-frame (never counting time spent
+      // paused under a finger), so a hold-and-release resumes exactly where
+      // it left off instead of jumping ahead.
+      let elapsed = 0;
+      let lastNow: number | null = null;
       const step = (now: number) => {
         if (stopRef.current) return;
-        const t = Math.min(1, (now - t0) / duration);
+        if (pausedRef.current) {
+          lastNow = now;
+          rafRef.current = requestAnimationFrame(step);
+          return;
+        }
+        if (lastNow !== null) elapsed += now - lastNow;
+        lastNow = now;
+        const t = Math.min(1, elapsed / duration);
         // easeInOutQuad — gentle start/stop, even cruise in between.
         const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
         window.scrollTo(0, startY + distance * eased);
@@ -126,17 +152,60 @@ export function AutoScroll() {
   // The moment the guest interacts, the tour yields to them.
   useEffect(() => {
     if (!running) return;
-    const events: (keyof WindowEventMap)[] = [
-      'wheel',
-      'touchstart',
-      'keydown',
-      'mousedown',
-    ];
-    const interrupt = () => stop();
-    events.forEach((e) => window.addEventListener(e, interrupt, { passive: true }));
-    return () =>
-      events.forEach((e) => window.removeEventListener(e, interrupt));
-  }, [running, stop]);
+
+    // Scrolling with a wheel / pressing a key means the guest has taken
+    // over — end the tour for good. (On touch devices a mouse-click would be
+    // emulated from every tap, so mousedown only counts as an interrupt on
+    // mouse-only machines.)
+    const hardStop = () => stop();
+    const hardEvents: (keyof WindowEventMap)[] = ['wheel', 'keydown'];
+    if (!hasTouch) hardEvents.push('mousedown');
+    hardEvents.forEach((e) =>
+      window.addEventListener(e, hardStop, { passive: true })
+    );
+
+    // On touch screens, resting a finger simply pauses the glide where it
+    // is; lifting it resumes from that exact spot. A real drag (past a small
+    // threshold) counts as the guest taking over and ends the tour.
+    let touchCleanup: (() => void) | null = null;
+    if (hasTouch) {
+      const onTouchStart = (e: TouchEvent) => {
+        const t = e.touches[0];
+        touchStartRef.current = t ? { x: t.clientX, y: t.clientY } : null;
+        pausedRef.current = true;
+      };
+      const onTouchMove = (e: TouchEvent) => {
+        const start = touchStartRef.current;
+        const t = e.touches[0];
+        if (start && t) {
+          const dx = Math.abs(t.clientX - start.x);
+          const dy = Math.abs(t.clientY - start.y);
+          if (Math.hypot(dx, dy) > 40) stop();
+        }
+      };
+      const onTouchEnd = () => {
+        touchStartRef.current = null;
+        pausedRef.current = false;
+      };
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('touchend', onTouchEnd, { passive: true });
+      window.addEventListener('touchcancel', onTouchEnd, { passive: true });
+      touchCleanup = () => {
+        window.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
+        window.removeEventListener('touchcancel', onTouchEnd);
+      };
+    }
+
+    return () => {
+      hardEvents.forEach((e) =>
+        window.removeEventListener(e, hardStop)
+      );
+      touchCleanup?.();
+    };
+  }, [running, stop, hasTouch]);
 
   return (
     <AnimatePresence>
