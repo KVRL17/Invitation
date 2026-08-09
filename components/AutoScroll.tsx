@@ -4,32 +4,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 /**
- * Section stops in page order, each with the reading time (ms) a guest gets
- * before the page gently scrolls on to the next one.
+ * AutoScroll — after the invitation opens, glides the guest through the
+ * whole page with one continuous, even scroll (no per-section pauses). The
+ * tour stops the moment the guest scrolls, touches or presses a key, and a
+ * small button lets them restart it. Respects prefers-reduced-motion.
  */
-const SECTION_STOPS: { id: string; readMs: number }[] = [
-  { id: 'hero', readMs: 5000 },
-  { id: 'meet-the-couple', readMs: 7000 },
-  { id: 'ring-animation', readMs: 5000 },
-  { id: 'save-the-date', readMs: 5500 },
-  { id: 'countdown', readMs: 4500 },
-  { id: 'event-details', readMs: 7000 },
-  { id: 'couple-illustration', readMs: 6000 },
-  { id: 'gallery', readMs: 6000 },
-  { id: 'blessings', readMs: 5000 },
-  { id: 'rsvp', readMs: 8000 },
-  { id: 'closing', readMs: 6000 },
-];
 
-/** How long the smooth scroll between two sections takes. */
-const SCROLL_MS = 900;
-
-/**
- * AutoScroll — after the invitation opens, gently walks the guest through
- * each section, pausing long enough to read it. The tour stops the moment the
- * guest scrolls, touches or presses a key, and a small button lets them
- * restart it. Respects prefers-reduced-motion.
- */
+/** Pace of the continuous scroll, in pixels per second. */
+const SCROLL_PX_PER_S = 80;
 export function AutoScroll() {
   const [running, setRunning] = useState(false);
   const [reduce] = useState(
@@ -74,62 +56,47 @@ export function AutoScroll() {
         tick();
       });
 
-    // Smoothly scroll to a Y position, cancelling if the tour is stopped.
-    const animateTo = (targetY: number) =>
-      new Promise<void>((resolve) => {
-        const startY = window.scrollY;
-        const delta = targetY - startY;
-        const t0 = performance.now();
-        const step = (now: number) => {
-          if (stopRef.current) {
-            resolve();
-            return;
-          }
-          const t = Math.min(1, (now - t0) / SCROLL_MS);
-          // easeInOutQuad
-          const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-          window.scrollTo(0, startY + delta * eased);
-          if (t < 1) rafRef.current = requestAnimationFrame(step);
-          else resolve();
-        };
-        rafRef.current = requestAnimationFrame(step);
-      });
-
     (async () => {
       // The invitation:open event fires synchronously right after the main
       // content is mounted, so React may not have committed the DOM yet.
-      // Wait until every tour section actually exists before scrolling.
+      // Wait until the invitation actually has height before measuring.
       let waits = 0;
       while (!stopRef.current && waits < 50) {
-        const els = SECTION_STOPS.map((s) =>
-          document.getElementById(s.id)
-        ).filter((el): el is HTMLElement => Boolean(el));
-        if (els.length === SECTION_STOPS.length) {
-          // Resume from the first section at or below the current viewport.
-          const viewportTop = window.scrollY;
-          let start = els.findIndex(
-            (el) => el.offsetTop + el.offsetHeight > viewportTop + 8
-          );
-          if (start < 0) start = 0;
-
-          for (let i = start; i < els.length; i++) {
-            if (stopRef.current) break;
-            await animateTo(els[i].offsetTop - 8);
-            if (stopRef.current) break;
-            await sleep(SECTION_STOPS[i].readMs);
-          }
-          // Finish by reaching the very bottom of the page.
-          if (!stopRef.current) {
-            await animateTo(document.documentElement.scrollHeight);
-          }
-          break;
-        }
+        const main = document.getElementById('invitation');
+        if (main && main.offsetHeight > 0) break;
         waits += 1;
         await sleep(100);
       }
-      stopRef.current = true;
-      runningRef.current = false;
-      setRunning(false);
+      if (stopRef.current) return;
+
+      // One continuous pass: ease in, glide down the whole page, ease out.
+      const startY = window.scrollY;
+      const maxY = document.documentElement.scrollHeight - window.innerHeight;
+      const distance = Math.max(0, maxY - startY);
+      if (distance <= 0) {
+        stopRef.current = true;
+        runningRef.current = false;
+        setRunning(false);
+        return;
+      }
+
+      const duration = (distance / SCROLL_PX_PER_S) * 1000;
+      const t0 = performance.now();
+      const step = (now: number) => {
+        if (stopRef.current) return;
+        const t = Math.min(1, (now - t0) / duration);
+        // easeInOutQuad — gentle start/stop, even cruise in between.
+        const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        window.scrollTo(0, startY + distance * eased);
+        if (t < 1) {
+          rafRef.current = requestAnimationFrame(step);
+        } else {
+          stopRef.current = true;
+          runningRef.current = false;
+          setRunning(false);
+        }
+      };
+      rafRef.current = requestAnimationFrame(step);
     })();
   }, [reduce]);
 
