@@ -2,15 +2,12 @@
 
 import { useReducedMotion } from 'framer-motion';
 import { invitationConfig } from '@/lib/invitationConfig';
-import { BridePortrait, GroomPortrait } from '../decor/CouplePortrait';
 import { Blossom, Leaf } from '../decor/Flower';
 import { Reveal } from '../motion/Reveal';
 
 /**
- * Meet the Couple — two premium cartoon portraits of Brinda & Chaitanya in
- * gold-rimmed oval frames, floating gently with twinkling sparkles. The
- * portraits are hand-drawn SVGs so they always look on-theme and load
- * instantly.
+ * Meet the Couple — real photos of Brinda & Chaitanya in gold-rimmed oval
+ * frames, floating gently with twinkling sparkles.
  */
 export function CoupleSection() {
   const reduce = useReducedMotion();
@@ -59,7 +56,12 @@ export function CoupleSection() {
               >
                 <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
                   <div className={reduce ? undefined : 'anim-float-soft'}>
-                    <BridePortrait size={246} className="mx-auto" />
+                    <img
+                      src="/images/bride.jpeg"
+                      alt={`${invitationConfig.brideName} — The Bride`}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 {/* shimmering gold ring inside */}
@@ -93,7 +95,12 @@ export function CoupleSection() {
               >
                 <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
                   <div className={reduce ? undefined : 'anim-float-soft'} style={{ animationDelay: '0.7s' }}>
-                    <GroomPortrait size={246} className="mx-auto" />
+                    <img
+                      src="/images/groom.jpeg"
+                      alt={`${invitationConfig.groomName} — The Groom`}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <div className="pointer-events-none absolute inset-0 rounded-t-full rounded-b-[46%] ring-1 ring-gold/40" aria-hidden="true" />
