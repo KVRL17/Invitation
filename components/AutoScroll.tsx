@@ -38,12 +38,19 @@ export function AutoScroll() {
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
+  // Keep the "am I running" guard in a ref (not state) so `run`/`stop` stay
+  // referentially stable. If they depended on the `running` state, toggling
+  // it would recreate them, which would re-run the `invitation:open` effect
+  // below — and its cleanup would call `stop()` and cancel the tour right
+  // after it started.
+  const runningRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const timerRef = useRef<number | null>(null);
   const stopRef = useRef(false);
 
   const stop = useCallback(() => {
     stopRef.current = true;
+    runningRef.current = false;
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     if (timerRef.current !== null) clearTimeout(timerRef.current);
     rafRef.current = null;
@@ -52,26 +59,11 @@ export function AutoScroll() {
   }, []);
 
   const run = useCallback(() => {
-    if (running || reduce) return;
+    if (runningRef.current || reduce) return;
     stopRef.current = false;
+    runningRef.current = true;
     setRunning(true);
 
-    const els = SECTION_STOPS.map((s) => document.getElementById(s.id)).filter(
-      (el): el is HTMLElement => Boolean(el)
-    );
-    if (!els.length) {
-      setRunning(false);
-      return;
-    }
-
-    // Resume from the first section that is at or below the current viewport.
-    const viewportTop = window.scrollY;
-    let start = els.findIndex(
-      (el) => el.offsetTop + el.offsetHeight > viewportTop + 8
-    );
-    if (start < 0) start = 0;
-
-    // Resolves early if the tour is stopped mid-wait.
     const sleep = (ms: number) =>
       new Promise<void>((resolve) => {
         const end = Date.now() + ms;
@@ -104,20 +96,42 @@ export function AutoScroll() {
       });
 
     (async () => {
-      for (let i = start; i < els.length; i++) {
-        if (stopRef.current) break;
-        await animateTo(els[i].offsetTop - 8);
-        if (stopRef.current) break;
-        await sleep(SECTION_STOPS[i].readMs);
-      }
-      // Finish by reaching the very bottom of the page.
-      if (!stopRef.current) {
-        await animateTo(document.documentElement.scrollHeight);
+      // The invitation:open event fires synchronously right after the main
+      // content is mounted, so React may not have committed the DOM yet.
+      // Wait until every tour section actually exists before scrolling.
+      let waits = 0;
+      while (!stopRef.current && waits < 50) {
+        const els = SECTION_STOPS.map((s) =>
+          document.getElementById(s.id)
+        ).filter((el): el is HTMLElement => Boolean(el));
+        if (els.length === SECTION_STOPS.length) {
+          // Resume from the first section at or below the current viewport.
+          const viewportTop = window.scrollY;
+          let start = els.findIndex(
+            (el) => el.offsetTop + el.offsetHeight > viewportTop + 8
+          );
+          if (start < 0) start = 0;
+
+          for (let i = start; i < els.length; i++) {
+            if (stopRef.current) break;
+            await animateTo(els[i].offsetTop - 8);
+            if (stopRef.current) break;
+            await sleep(SECTION_STOPS[i].readMs);
+          }
+          // Finish by reaching the very bottom of the page.
+          if (!stopRef.current) {
+            await animateTo(document.documentElement.scrollHeight);
+          }
+          break;
+        }
+        waits += 1;
+        await sleep(100);
       }
       stopRef.current = true;
+      runningRef.current = false;
       setRunning(false);
     })();
-  }, [running, reduce]);
+  }, [reduce]);
 
   // Start automatically once the guest opens the invitation.
   useEffect(() => {

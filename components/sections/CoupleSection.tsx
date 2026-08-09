@@ -55,7 +55,7 @@ export function CoupleSection() {
                 style={{ width: 262, height: 330 }}
               >
                 <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
-                  <div className={reduce ? undefined : 'anim-float-soft'}>
+                  <div className={`h-full w-full ${reduce ? '' : 'anim-float-soft'}`}>
                     <img
                       src="/images/bride.jpeg?v=2"
                       alt={`${invitationConfig.brideName} — The Bride`}
@@ -93,11 +93,11 @@ export function CoupleSection() {
                 style={{ width: 262, height: 330 }}
               >
                 <div className="h-full w-full overflow-hidden rounded-t-full rounded-b-[44%] border border-gold/30 bg-ivory">
-                  <div className={reduce ? undefined : 'anim-float-soft'} style={{ animationDelay: '0.7s' }}>
+                  <div className={`h-full w-full ${reduce ? '' : 'anim-float-soft'}`} style={{ animationDelay: '0.7s' }}>
                     <img
                       src="/images/groom.jpeg?v=2"
                       alt={`${invitationConfig.groomName} — The Groom`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-top"
                     />
                   </div>
                 </div>
