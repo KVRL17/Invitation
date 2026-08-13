@@ -58,10 +58,10 @@ export const invitationConfig = {
     '/gallery/placeholder-3.svg',
   ],
   galleryImages: [
-    '/gallery/placeholder-1.svg',
-    '/gallery/placeholder-2.svg',
-    '/gallery/placeholder-3.svg',
-    '/gallery/placeholder-4.svg',
+    '/gallery/DSC06694.jpg',
+    '/gallery/DSC06696.jpg',
+    '/gallery/DSC06706.jpg',
+    '/gallery/DSC06722.jpg',
   ],
   /**
    * Leave empty to use the built-in generative ambient track.
