@@ -74,6 +74,11 @@ export default function RootLayout({
             "Meet the Couple" section renders instantly with no lag. */}
         <link rel="preload" as="image" href="/images/bride.jpeg?v=2" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/groom.jpeg?v=2" fetchPriority="high" />
+        {/* Preload gallery images so they're ready before scroll reaches them. */}
+        <link rel="preload" as="image" href="/gallery/DSC06696.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/gallery/DSC06722.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/gallery/DSC06694.webp" fetchPriority="low" />
+        <link rel="preload" as="image" href="/gallery/DSC06706.webp" fetchPriority="low" />
       </head>
       <body>{children}</body>
     </html>
