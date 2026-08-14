@@ -103,7 +103,7 @@ export function CoupleSection() {
                     style={{ animationDelay: '0.7s' }}
                   >
                     <img
-                      src="/images/groom.jpeg?v=3"
+                      src="/images/groome.jpeg?v=1"
                       alt={`${invitationConfig.groomName} — The Groom`}
                       className="h-full w-full object-cover object-top"
                     />
